@@ -6,8 +6,8 @@ author:
   - author 3 (matriculation number)
 date: '2021-10-25 till 2021-11-14'
 output:
-  pdf_document: default
-  # html_notebook: default  # uncomment to knit output to pdf
+  # pdf_document: default # uncomment to knit output to pdf
+  html_notebook: default  
 urlcolor: blue
 ---
 
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 ___
 
-- You may answer this problem set in groups of up to three people. Please state your names and matriculation numbers in the `YAML` header before submission (under the `author` field).
+- You may answer this problem set in groups of up to three students. Please state your names and matriculation numbers in the `YAML` header before submission (under the `author` field).
 
 - Please hand in your answers via GitHub until 2021-11-14, 23:59 pm. When you have pushed your final results to GitHub, create a GitHub issue with the title "Hand-in" and mark Marius (GitHub username: *puchalla*) and Simon (GitHub username: *simonschoe*) as assignees or reference us in the issue description. Please ensure that all code chunks can be executed without error before pushing your last commit!
 
@@ -39,16 +39,18 @@ ___
 
 Before starting, leverage the `pacman` package by executing the code chunk below. `pacman` is a convenient helper for installing and loading packages at the start of your project. It checks whether a package has already been installed and loads the package if available. Otherwise it installs the package automatically. Use `pacman::p_load()` to install and load the following packages:
 
-- `tidyverse` (meta-package to load `dplyr`, `ggplot2`, and co.),
-- `tidymodels` (meta-package to load `rsample`, `parsnip`, `tune`, and co.),
-- `GLMsData` (contains the dataset for *Task 1*),
-- `ISLR` (contains the dataset for *Task 3*),
-- `boot` (functions for bootstrapping),
-- `MASS` (functions for discriminant analysis),
-- `class`, `kknn` (functions for k-NN),
-- `glmnet` (functions for regularized regression),
-- `leaps` (functions for stepwise subset selection),
-- `discrim` (helper functions for LDA and Naive Bayes using `tidymodels`),
+- `tidyverse` (meta-package to load `dplyr`, `ggplot2`, and co.)
+- `tidymodels` (meta-package to load `rsample`, `parsnip`, `tune`, and co.)
+- `GLMsData` (contains the dataset for *Task 1*)
+- `ISLR` (contains the dataset for *Task 3*)
+- `boot` (functions for bootstrapping)
+- `MASS` (functions for discriminant analysis)
+- `discrim` (helper functions for LDA and Naive Bayes using `tidymodels`)
+- `class`, `kknn` (functions for k-NN)
+- `glmnet` (functions for regularized regression)
+- `leaps` (functions for stepwise subset selection)
+
+*Note: In case you rely on other additional or alternative packages for solving this assignment, please add them to the `pacman` commands below.*
 
 ```{r packages, message=F}
 # check if pacman is installed (install if evaluates to FALSE)
@@ -57,7 +59,7 @@ if (!require("pacman")) install.packages("pacman")
 # load (or install if pacman cannot find an existing installation) the relevant packages
 pacman::p_load(
   tidyverse, tidymodels, GLMsData, ISLR,
-  boot, MASS, kknn, class, glmnet, leaps
+  boot, MASS, discrim, kknn, class, glmnet, leaps
 )
 pacman::p_load_gh("tidymodels/discrim")
 ```
@@ -656,7 +658,3 @@ What are the main differences between using adjusted $R^2$ for model selection a
 Use Lasso and Ridge regression on the data to predict the `log_price`. Therefore, employ the `cv.glmnet()` function from the `glmnet` package and fit the models using the MSE as loss function and `nfolds = 5` as the number of folds. What is the optimal penalty hyperparameter (*lambda*) and the corresponding MSE in both cases? Which predictors are selected by the optimal Lasso model?
 
 *Hint:  Unfortunately, you cannot feed a data frame object to the first argument `x` of `cv.glmnet()`. Instead, the function requires a predictor matrix as input. To convert the `diamonds` data frame into a matrix object you may use the `model.matrix` function.*
-
-
-## Sources
-Some of the exercises are based on those from other machine/statistical learning courses, i.e. by the Norwegian University of Science and Technology (NTNU) and the Albert-Ludwigs-Universität Freiburg.
